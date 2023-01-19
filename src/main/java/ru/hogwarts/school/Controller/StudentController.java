@@ -28,8 +28,9 @@ public class StudentController {
         return studentService.editStudent(student);
     }
     @DeleteMapping("{id}")
-    public Student deleteStudent(@PathVariable long id){
-        return studentService.deleteStudent(id);
+    public ResponseEntity  deleteStudent(@PathVariable long id){
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok().build();
     }
     @GetMapping
     public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) int age) {
