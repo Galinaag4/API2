@@ -12,26 +12,32 @@ import java.util.Collections;
 @RequestMapping("students")
 public class StudentController {
     private StudentService studentService;
+
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+
     @GetMapping("{id}")
-    public Student getStudent(@PathVariable long id){
+    public Student getStudent(@PathVariable long id) {
         return studentService.findStudent(id);
     }
+
     @PostMapping
-    public Student createStudent(@RequestBody Student student){
+    public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
     }
+
     @PutMapping
-    public Student editStudent(@RequestBody Student student){
+    public Student editStudent(@RequestBody Student student) {
         return studentService.editStudent(student);
     }
+
     @DeleteMapping("{id}")
-    public ResponseEntity  deleteStudent(@PathVariable long id){
+    public ResponseEntity deleteStudent(@PathVariable long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping
     public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) int age) {
         if (age > 0) {
@@ -39,7 +45,6 @@ public class StudentController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
-
 
 
 }

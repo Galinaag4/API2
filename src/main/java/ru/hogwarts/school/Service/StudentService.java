@@ -16,22 +16,25 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Student createStudent(Student student){
+    public Student createStudent(Student student) {
         return studentRepository.save(student);
-    }
-    public Student findStudent(long id){
-        return studentRepository.findById(id).get();
-    }
-    public Student editStudent(Student student){
-        return studentRepository.save(student);
-    }
-    public  void deleteStudent(long id){
-        studentRepository.deleteById(id);
-    }
-    public Collection<Student> findByAge(int age) {
-        return studentRepository.findAll();
     }
 
+    public Student findStudent(long id) {
+        return studentRepository.findById(id).get();
+    }
+
+    public Student editStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    public void deleteStudent(long id) {
+        studentRepository.deleteById(id);
+    }
+
+    public Collection<Student> findByAge(int age) {
+        return studentRepository.findByAge(age);
+    }
 
 
 }

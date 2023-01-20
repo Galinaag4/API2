@@ -12,27 +12,33 @@ import java.util.Collections;
 @RequestMapping("facultys")
 public class FacultyController {
     private FacultyService facultyService;
+
     public FacultyController(FacultyService facultyService) {
         this.facultyService = facultyService;
     }
+
     @GetMapping("{id}")
-    public Faculty getFaculty(@PathVariable long id){
+    public Faculty getFaculty(@PathVariable long id) {
         return facultyService.findFaculty(id);
     }
+
     @PostMapping
-    public Faculty createFaculty(@RequestBody Faculty faculty){
+    public Faculty createFaculty(@RequestBody Faculty faculty) {
         return facultyService.createFaculty(faculty);
     }
+
     @PutMapping
-    public Faculty editFaculty(@RequestBody Faculty faculty){
+    public Faculty editFaculty(@RequestBody Faculty faculty) {
         return facultyService.editFaculty(faculty);
     }
+
     @DeleteMapping("{id}")
-    public ResponseEntity deleteFaculty(@PathVariable long id){
+    public ResponseEntity deleteFaculty(@PathVariable long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
 
     }
+
     @GetMapping
     public ResponseEntity<Collection<Faculty>> findFaculties(@RequestParam(required = false) String color) {
         if (color != null && !color.isBlank()) {
@@ -40,8 +46,6 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
-
-
 
 
 }
