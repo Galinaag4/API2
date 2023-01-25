@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.Model.Student;
 import ru.hogwarts.school.Service.StudentService;
 
+import javax.websocket.server.PathParam;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -45,6 +46,17 @@ public class StudentController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
+    @GetMapping("/findByAgeBetween")
+    public ResponseEntity<Collection<Student>> findByAgeBetween(@RequestParam int min,@RequestParam int max) {
+
+        return ResponseEntity.ok(studentService.findByAgeBetween(min, max));
+    }
+    @GetMapping("/getStudentFaculty")
+    public ResponseEntity<Collection<Student>> getStudentFaculty(@RequestParam(required = false) long id){
+        return ResponseEntity.ok(studentService.ById(id));
+    }
+
+
 
 
 }
