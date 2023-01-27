@@ -1,6 +1,5 @@
 package ru.hogwarts.school.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.Model.Faculty;
 import ru.hogwarts.school.Model.Student;
@@ -40,11 +39,11 @@ public class FacultyService {
     public Collection<Faculty> findByName(String name) {
         return facultyRepository.findByNameContainsIgnoreCase(name);
     }
-    public Collection<Faculty> ByStudent(long id) {
-        return facultyRepository.getFacultyByStudentsId(id);
-
+    public Student findStudentByFaculty(long id){
+        return (Student) facultyRepository.findById(id)
+                .map(faculty -> faculty.getStudents())
+                .orElse(null);
     }
-
 
 }
 
