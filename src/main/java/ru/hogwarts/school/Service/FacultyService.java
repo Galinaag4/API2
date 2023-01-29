@@ -39,8 +39,8 @@ public class FacultyService {
     public Collection<Faculty> findByName(String name) {
         return facultyRepository.findByNameContainsIgnoreCase(name);
     }
-    public Student findStudentByFaculty(long id){
-        return (Student) facultyRepository.findById(id)
+    public Collection<Student> findStudentByFaculty(long id){
+        return  facultyRepository.findById(id)
                 .map(faculty -> faculty.getStudents())
                 .orElse(null);
     }

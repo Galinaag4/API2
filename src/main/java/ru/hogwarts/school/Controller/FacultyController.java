@@ -6,7 +6,6 @@ import ru.hogwarts.school.Model.Faculty;
 import ru.hogwarts.school.Model.Student;
 import ru.hogwarts.school.Service.FacultyService;
 
-import javax.websocket.server.PathParam;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -52,10 +51,11 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
-    /*@GetMapping("/faculty/student/{id}")
-    public Collection<Student> findStudentByFaculty(@PathParam("id") long id){
-        return (Collection<Student>) facultyService.findStudentByFaculty(id);
-    }*/
+    @GetMapping("/{id}/student")
+    public  ResponseEntity<Student> findStudentByFaculty(@PathVariable("id") long id){
+          facultyService.findStudentByFaculty(id);
+          return ResponseEntity.ok().build();
+    }
 
 
 
