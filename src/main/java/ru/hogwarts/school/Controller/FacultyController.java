@@ -52,9 +52,8 @@ public class FacultyController {
         return ResponseEntity.ok(Collections.emptyList());
     }
     @GetMapping("/{id}/student")
-    public  ResponseEntity<Student> findStudentByFaculty(@PathVariable("id") long id){
-          facultyService.findStudentByFaculty(id);
-          return ResponseEntity.ok().build();
+    public ResponseEntity<Collection<Student>> findStudentByFaculty(@PathVariable("id") long id){
+        return ResponseEntity.ok(facultyService.findStudentByFaculty(id));
     }
 
 
