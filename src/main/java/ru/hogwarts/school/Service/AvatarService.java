@@ -49,10 +49,12 @@ public class AvatarService {
         avatar.setData(avatarFile.getBytes());
         avatarRepository.save(avatar);
     }
+
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
-    public Avatar findAvatar(long studentId){
+
+    public Avatar findAvatar(long studentId) {
         return avatarRepository.findByStudentId(studentId).orElse(new Avatar());
     }
 }

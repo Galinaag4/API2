@@ -1,11 +1,15 @@
 package ru.hogwarts.school.Service;
 
 import org.springframework.stereotype.Service;
+import ru.hogwarts.school.SQL.AgeStudent;
+import ru.hogwarts.school.SQL.CountStudent;
 import ru.hogwarts.school.Model.Faculty;
 import ru.hogwarts.school.Model.Student;
 import ru.hogwarts.school.Repository.StudentRepository;
+import ru.hogwarts.school.SQL.LastStudent;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -44,7 +48,14 @@ public class StudentService {
         return studentRepository.findById(id)
                 .map(student -> student.getFaculty())
                 .orElse(null);
-
-
+    }
+    public List<CountStudent> getCountStudent(){
+        return studentRepository.getCountStudent();
+    }
+    public List<AgeStudent> getAverageAge(){
+        return studentRepository.getAverageAge();
+    }
+    public List<LastStudent> getLastStudent(){
+        return studentRepository.getLastStudent();
     }
 }
