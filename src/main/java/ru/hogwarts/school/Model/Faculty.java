@@ -1,6 +1,8 @@
 package ru.hogwarts.school.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ public class Faculty {
     private String name;
     private String color;
     private static int counter;
+    @JsonManagedReference
     @OneToMany(mappedBy = "faculty")
     private Collection<Student> students;
     public Faculty(String name, String color) {
@@ -26,6 +29,9 @@ public class Faculty {
 
     public Faculty() {
 
+    }
+
+    public Faculty(long id, String name, String color) {
     }
 
     public long getId() {

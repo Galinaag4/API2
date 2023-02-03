@@ -11,5 +11,7 @@ public interface FacultyRepository extends JpaRepository<Faculty, Long> {
     List<Faculty> findByNameContainsIgnoreCase(String name);
 
     List<Faculty> findByColorContainsIgnoreCase(String color);
+
+    Object findAllByColor(String eq);
 }
 
