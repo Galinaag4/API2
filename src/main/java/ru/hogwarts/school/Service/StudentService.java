@@ -4,10 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.Model.Faculty;
 import ru.hogwarts.school.Model.Student;
 import ru.hogwarts.school.Repository.StudentRepository;
-import ru.hogwarts.school.SQL.LastStudent;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 public class StudentService {

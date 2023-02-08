@@ -3,7 +3,6 @@ package ru.hogwarts.school.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.hogwarts.school.Model.Student;
-import ru.hogwarts.school.SQL.LastStudent;
 
 import java.util.Collection;
 import java.util.List;
