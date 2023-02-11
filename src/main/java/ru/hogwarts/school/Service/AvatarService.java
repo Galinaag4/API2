@@ -1,5 +1,7 @@
 package ru.hogwarts.school.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Service
 @Transactional
 public class AvatarService {
+    Logger logger = LoggerFactory.getLogger(AvatarService.class);
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
     private final StudentService studentService;
@@ -49,18 +52,22 @@ public class AvatarService {
         avatar.setFileSize(avatarFile.getSize());
         avatar.setMediaType(avatarFile.getContentType());
         avatar.setData(avatarFile.getBytes());
+        logger.info("Метод uploadAvatar");
         avatarRepository.save(avatar);
     }
 
     private String getExtensions(String fileName) {
+        logger.info("Метод getExtensions");
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
     public Avatar findAvatar(long studentId) {
+        logger.info("Метод findAvatar");
         return avatarRepository.findByStudentId(studentId).orElse(new Avatar());
     }
     public List<Avatar> getAllAvatar(Integer pageNumber, Integer pageSize){
         PageRequest pageRequest = PageRequest.of(pageNumber-1,pageSize);
+        logger.info("Метод getAllAvatar");
         return avatarRepository.findAll(pageRequest).getContent();
     }
 }
