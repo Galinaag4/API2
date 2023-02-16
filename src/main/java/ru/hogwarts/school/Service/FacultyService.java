@@ -54,6 +54,10 @@ public class FacultyService {
                 .map(faculty -> faculty.getStudents())
                 .orElse(null);
     }
+    public String getLongName(){
+        return facultyRepository.findAll().stream().max(Comparator.comparing(s -> s.getName().length())).get().getName();
+
+    }
 
 }
 
