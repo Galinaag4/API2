@@ -8,6 +8,8 @@ import ru.hogwarts.school.Model.Student;
 import ru.hogwarts.school.Repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,9 +61,9 @@ public class StudentService {
         logger.info("Метод getCountStudent ");
         return studentRepository.getCountStudent();
     }
-    public double getAverageAge(){
+    public OptionalDouble getAverageAge(){
         logger.info("Метод getAverageAge ");
-        return studentRepository.getAverageAge();
+        return studentRepository.findAll().stream().mapToDouble(s->s.getAge()).average();
     }
     public Collection<Student> getLastStudent(){
         logger.info("Метод getLastStudent ");
@@ -71,5 +73,70 @@ public class StudentService {
         logger.info("Метод getNameA ");
         return studentRepository.findAll().stream().filter(s -> s.getName().toLowerCase().toUpperCase().startsWith("А"))
                 .collect(Collectors.toList());
+    }
+    public void printAllStudentsNames() {
+        List<String> studentsNames = studentRepository.findAll()
+                .stream()
+                .map(Student::getName).toList();
+        for (int i = 0; i < 2; i++) {
+            System.out.println(studentsNames.get(i));
+        }
+        new Thread(() ->
+        {
+            for (int i = 2; i < 4; i++) {
+                System.out.println(studentsNames.get(i));
+            }
+        }
+        ).start();
+        new Thread(() ->
+        {
+            for (int i = 4; i < 6; i++) {
+                System.out.println(studentsNames.get(i));
+            }
+        }
+        ).start();
+        new Thread(() ->
+        {
+            for (int i = 6; i < 8; i++) {
+                System.out.println(studentsNames.get(i));
+            }
+        }
+        ).start();
+    }
+
+    public void printAllStudentsNamesInSynchronizedStream() throws InterruptedException {
+        print(0);
+        print(1);
+        Thread thread_1 = new Thread(() ->
+        {
+            print(2);
+            print(3);
+        }
+        );
+        thread_1.start();
+        thread_1.join();
+        Thread thread_2 =   new Thread(() ->
+        {
+            print(4);
+            print(5);
+        }
+        );
+        thread_2.start();
+        thread_2.join();
+        Thread thread_3 = new Thread(() ->
+        {
+            print(6);
+            print(7);
+        }
+        );
+        thread_3.start();
+        thread_3.join();
+    }
+
+    private void print(int index) {
+        List<String> studentsNames = studentRepository.findAll()
+                .stream()
+                .map(Student::getName).toList();
+        System.out.println(studentsNames.get(index));
     }
 }

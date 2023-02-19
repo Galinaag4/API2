@@ -60,6 +60,15 @@ public class StudentController {
     public ResponseEntity<Collection<Student>> getNameA(){
         return ResponseEntity.ok(studentService.getNameA());
     }
+    @GetMapping("/printAllStudentsNames")
+    public void printAllStudentsNames() {
+        studentService.printAllStudentsNames();
+    }
+
+    @GetMapping("/printAllStudentsNamesInSynchronizedStream")
+    public void printAllStudentsNamesInSynchronizedStream() throws InterruptedException {
+        studentService.printAllStudentsNamesInSynchronizedStream();
+    }
 
 
 
